@@ -128,12 +128,14 @@ if uploaded_file:
         # Filtrera datan baserat på carat
         df_filtered = df[(df["carat"] >= carat_range[0]) & (df["carat"] <= carat_range[1])]
 
+        # Val av de 4 C:na
         val = st.radio(
             "Välj vilket C du vill analysera:",
          ["Carat", "Cut", "Color", "Clarity"], key="val_c_4c",
          horizontal=True
         )
 
+        # Val för diamant fördelning
         if val == "Carat":
             fig = px.histogram(df_filtered, x="carat", nbins=50, title="Diamant fördelning av Carat(Vikt)", color_discrete_sequence=["#2b8cbe"])
             st.plotly_chart(fig, use_container_width=True)
@@ -150,7 +152,7 @@ if uploaded_file:
             fig = px.histogram(df_filtered, x="clarity", title="Diamant fördelning av Clarity(Klarhet)", color="clarity")
             st.plotly_chart(fig, use_container_width=True)
 
-
+        # Val för pris fördelning
         if val == "Carat":
             fig = px.scatter(df_filtered, x="carat", y="price", title="Pris fördelning av Carat(Vikt)", color_discrete_sequence=["#2b8cbe"])
             st.plotly_chart(fig, use_container_width=True)
