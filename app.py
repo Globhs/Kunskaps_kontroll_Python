@@ -11,7 +11,7 @@ st.title("Diamantanalys – Streamlit App")
 st.write("Ladda upp en `diamonds.csv`-fil för att analysera och visualisera data.")
 uploaded_file = st.file_uploader("Ladda upp diamonds.csv", type=["csv"])
 
-# 1. Filuppladdning
+# Filuppladdning
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
 
@@ -28,7 +28,7 @@ if uploaded_file:
         st.subheader("Dataförhandsvisning")
         st.dataframe(df.head())
 
-        # 3. Histogram och Scatterplot
+        # Histogram och Scatterplot
         st.subheader("Carat-distribution & Scatterplot (Pris vs Carat)")
         mean_carat = df["carat"].mean().round(3)
         correlation = df["carat"].corr(df["price"])
@@ -49,7 +49,7 @@ if uploaded_file:
         fig.update_layout(showlegend=False, height=500)
         st.plotly_chart(fig, use_container_width=True)
 
-        # 4. Korrelationsmatris (1–2 carat)
+        # Korrelationsmatris (1–2 carat)
         st.subheader("Korrelationsmatris (1–2 carat)")
 
         df_filtered = df[(df["carat"] >= 1) & (df["carat"] <= 2)].copy()
@@ -70,7 +70,7 @@ if uploaded_file:
         st.plotly_chart(fig_corr, use_container_width=True)
 
 
-        # 6. Investeringsanalys
+        # Investeringsanalys
         st.subheader("Förväntad vinstanalys (Top 100 mest vs minst volatila)")
         median_price = df["price"].median()
         good = df[
@@ -112,7 +112,7 @@ if uploaded_file:
     with tab2:
         st.subheader("Diamant och pris fördelning av de 4 C:n")
 
-        # 1. Carat-slider
+        # Carat-slider
         min_carat = float(df["carat"].min())
         max_carat = float(df["carat"].max())
 
@@ -125,7 +125,7 @@ if uploaded_file:
             key="carat_slider"
         )
 
-        # 2. Filtrera datan baserat på carat
+        # Filtrera datan baserat på carat
         df_filtered = df[(df["carat"] >= carat_range[0]) & (df["carat"] <= carat_range[1])]
 
         val = st.radio(
